@@ -43,6 +43,51 @@
     <script src="static/js/bulma-carousel.min.js"></script>
     <script src="static/js/bulma-slider.min.js"></script>
     <script src="static/js/index.js"></script>
+    <script src="static/js/zoomin.js"></script>
+    <style>
+        #more_cbsd {
+            margin-top: 50px;
+            width: 1000px;
+            height: 500px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 2rem;
+            color: white;
+            background-image: url('./static/images/CBSD_noisy.jpg');
+            background-size: cover;
+        }
+
+        #more_cbsd:hover {
+            border: none;
+            outline: none;
+            background-image: url('./static/images/CBSD_denoised.jpg');
+            background-size: cover;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .img-zoom-container {
+            position: relative;
+        }
+
+        .img-zoom-lens {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            /*set the size of the lens:*/
+            width: 40px;
+            height: 40px;
+        }
+
+        .img-zoom-result {
+            border: 1px solid #d4d4d4;
+            /*set the size of the result div:*/
+            width: 300px;
+            height: 300px;
+        }
+    </style>
 </head>
 
 <body>
@@ -63,18 +108,20 @@
                         <span class="author-block">
                                           <a href="https://chenyuanqu.com/"
                                              target="_blank">Chenyuan Qu</a><sup>1</sup>,</span>
+                        Yu Zhang<sup>2</sup>,</span>
                         <span class="author-block">
-                                            <a href="THIRD AUTHOR PERSONAL LINK"
-                                               target="_blank">Chen Chen</a><sup>2</sup>,</span>
-                        Yu Zhang<sup>3</sup>,</span>
+                                            <a href="https://www.crcv.ucf.edu/chenchen/"
+                                               target="_blank">Chen Chen</a><sup>3</sup>,</span>
                         <a href="https://jianbojiao.com/" target="_blank">Jianbo Jiao</a><sup>1</sup>
                     </div>
 
                     <div class="is-size-5 publication-authors">
-                        <span class="author-block">NeurIPS 2023</span>
-                        <span class="eql-cntrb"><small><br><sup>1</sup>University of Birmingham</small></span>
-                        <span class="eql-cntrb"><small><br><sup>2</sup>University of Central Florida</small></span>
-                        <span class="eql-cntrb"><small><br><sup>3</sup>Nanjing University</small></span>
+                        <span class="author-block">ICCV 2023</span>
+                        <div style="display: flex; justify-content: space-around">
+                            <span class="eql-cntrb"><small><br><sup>1</sup>University of Birmingham</small></span>
+                            <span class="eql-cntrb"><small><br><sup>2</sup>Shanghai Jiao Tong University</small></span>
+                            <span class="eql-cntrb"><small><br><sup>3</sup>University of Central Florida</small></span>
+                        </div>
                     </div>
 
                     <div class="column has-text-centered">
@@ -112,16 +159,16 @@
                                       </a>
                                     </span>
 
-                            <!-- ArXiv abstract Link -->
-                            <span class="link-block">
-                                      <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                                         class="external-link button is-normal is-rounded is-dark">
-                                      <span class="icon">
-                                        <i class="ai ai-arxiv"></i>
-                                      </span>
-                                      <span>arXiv</span>
-                                    </a>
-                                  </span>
+                            <!--                            &lt;!&ndash; ArXiv abstract Link &ndash;&gt;-->
+                            <!--                            <span class="link-block">-->
+                            <!--                                      <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"-->
+                            <!--                                         class="external-link button is-normal is-rounded is-dark">-->
+                            <!--                                      <span class="icon">-->
+                            <!--                                        <i class="ai ai-arxiv"></i>-->
+                            <!--                                      </span>-->
+                            <!--                                      <span>arXiv</span>-->
+                            <!--                                    </a>-->
+                            <!--                                  </span>-->
                         </div>
                     </div>
                 </div>
@@ -135,7 +182,7 @@
 <section class="hero teaser">
     <div class="container is-max-desktop">
         <div class="hero-body">
-            <img src="static/images/arc.jpg" style="scale: 100%"/>
+            <img src="static/images/arc.png" style="scale: 100%"/>
             <!--            <h2 class="subtitle has-text-centered">-->
             <!--                Method Overview-->
             <!--            </h2>-->
@@ -152,20 +199,31 @@
                 <h2 class="title is-3">Abstract</h2>
                 <div class="content has-text-justified">
                     <p>
-                        With significant performance improvement, deep convolutional networks have become a standard
-                        tool for modern image denoisers. While promising performance has been shown on seen noise
-                        distributions, existing approaches often suffer from generalisation to unseen noise types or
-                        general and real noise. It is understandable as the model is designed to learn paired mapping
-                        (e.g., from a noisy image to its clean version). In this paper, we instead propose to learn to
-                        disentangle the noisy image, under the intuitive assumption that different corrupted versions of
-                        the same clean image share a common latent space. A self-supervised learning framework is
-                        proposed to achieve the goal, without looking at the latent clean image. By taking two different
-                        corrupted versions of the same image as input, the proposed Multi-view Self-supervised
-                        Disentanglement (MeD) approach learn to disentangle the latent clean features from the
-                        corruptions and recover the clean image consequently. Extensive experimental analysis on both
-                        synthetic noise and real noise shows the superiority of the proposed method over prior
-                        self-supervised approaches, especially on unseen novel noise types. On real noise, the proposed
-                        method even outperforms its supervised counterparts by over 3 dB.
+                        <i>
+                            With its significant performance improvements, deep learning paradigm has become a standard
+                            tool
+                            for modern image denoisers. While promising performance has been shown on seen noise
+                            distributions, existing approaches often suffer from generalization to unseen noise types or
+                            general and real noise. It is understandable as the model is designed to learn paired
+                            mapping
+                            (E.g., from a noisy image to its clean version).
+                            In this paper, we instead propose to learn to disentangle the noisy image, under the
+                            intuitive
+                            assumption that different corrupted versions of the same clean image share a common latent
+                            space. A self-supervised learning framework is proposed to achieve the goal, without looking
+                            at
+                            the latent clean image. By taking two different corrupted versions of the same image as
+                            input,
+                            the proposed <b>M</b>ulti-view S<b>e</b>lf-supervised <b>D</b>isentanglement (MeD)
+                            approach learn to disentangle the latent clean features from the corruptions and recover the
+                            clean image consequently.
+                            Extensive experimental analysis on both synthetic noise and real noise shows the superiority
+                            of
+                            the proposed method over prior self-supervised approaches, especially on unseen novel noise
+                            types. On real noise, the proposed method even outperforms its supervised counterparts by
+                            over
+                            3.
+                        </i>
                     </p>
                 </div>
             </div>
@@ -173,14 +231,171 @@
     </div>
 </section>
 
+<section class="hero is-small">
+    <div class="hero-body">
+        <div class="container">
+            <h2 class="title is-3">Visualisation Result</h2>
+            <center>
+                <button type="submit" id="more_cbsd">
+                    Put on your mouse!
+                </button>
+                <h2 class="subtitle has-text-centered">
+                    Visualisation result of CBSD68 dataset with local variance Gaussian noise +
+                    Poisson noise
+                </h2>
+            </center>
+            <div style="display: flex; justify-content: space-around">
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage1" src="static/images/PolyU/data30_denoised.jpg" width="368" height="245"
+                             alt="data30_denoising">
+                        <div id="myresult1" class="img-zoom-result"></div>
+                    </div>
+                </div>
 
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage2" src="static/images/PolyU/data30.JPG" width="368" height="245" alt="data30">
+                        <div id="myresult2" class="img-zoom-result"></div>
+                    </div>
+                </div>
+                <script>
+                    imageZoom("myimage1", "myresult1");
+                    imageZoom("myimage2", "myresult2");
+                </script>
+            </div>
+            <h2 class="subtitle has-text-centered">
+                Visualisation result of PolyU dataset
+            </h2>
+            <div style="display: flex; justify-content: space-around">
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage3" src="static/images/PolyU/data18_denoised.jpg" width="368" height="245"
+                             alt="data18_denoising">
+                        <div id="myresult3" class="img-zoom-result"></div>
+                    </div>
+                </div>
+
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage4" src="static/images/PolyU/data18.JPG" width="368" height="245" alt="data18">
+                        <div id="myresult4" class="img-zoom-result"></div>
+                    </div>
+                </div>
+                <script>
+                    imageZoom("myimage3", "myresult3");
+                    imageZoom("myimage4", "myresult4");
+                </script>
+            </div>
+            <h2 class="subtitle has-text-centered">
+                Visualisation result of PolyU dataset
+            </h2>
+
+            <div style="display: flex; justify-content: space-around">
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage5" src="static/images/PolyU/data22_denoised.jpg" width="368" height="245"
+                             alt="data22_denoising">
+                        <div id="myresult5" class="img-zoom-result"></div>
+                    </div>
+                </div>
+
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage6" src="static/images/PolyU/data22.JPG" width="368" height="245" alt="data22">
+                        <div id="myresult6" class="img-zoom-result"></div>
+                    </div>
+                </div>
+                <script>
+                    imageZoom("myimage5", "myresult5");
+                    imageZoom("myimage6", "myresult6");
+                </script>
+            </div>
+            <h2 class="subtitle has-text-centered">
+                Visualisation result of PolyU dataset
+            </h2>
+            <div style="display: flex; justify-content: space-around">
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage7" src="static/images/PolyU/data27_denoised.jpg" width="368" height="245"
+                             alt="data27_denoising">
+                        <div id="myresult7" class="img-zoom-result"></div>
+                    </div>
+                </div>
+
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage8" src="static/images/PolyU/data27.JPG" width="368" height="245" alt="data27">
+                        <div id="myresult8" class="img-zoom-result"></div>
+                    </div>
+                </div>
+                <script>
+                    imageZoom("myimage7", "myresult7");
+                    imageZoom("myimage8", "myresult8");
+                </script>
+            </div>
+            <h2 class="subtitle has-text-centered">
+                Visualisation result of PolyU dataset
+            </h2>
+            <div style="display: flex; justify-content: space-around">
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage9" src="static/images/PolyU/data21_denoised.jpg" width="368" height="245"
+                             alt="data21_denoising">
+                        <div id="myresult9" class="img-zoom-result"></div>
+                    </div>
+                </div>
+
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage10" src="static/images/PolyU/data21.JPG" width="368" height="245" alt="data21">
+                        <div id="myresult10" class="img-zoom-result"></div>
+                    </div>
+                </div>
+                <script>
+                    imageZoom("myimage9", "myresult9");
+                    imageZoom("myimage10", "myresult10");
+                </script>
+            </div>
+            <h2 class="subtitle has-text-centered">
+                Visualisation result of PolyU dataset
+            </h2>
+            <div style="display: flex; justify-content: space-around">
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage11" src="static/images/PolyU/data23_denoised.jpg" width="368" height="245"
+                             alt="data23_denoising">
+                        <div id="myresult11" class="img-zoom-result"></div>
+                    </div>
+                </div>
+
+                <div class="img-zoom-container">
+                    <div style="display: flex">
+                        <img id="myimage12" src="static/images/PolyU/data23.JPG" width="368" height="245" alt="data23">
+                        <div id="myresult12" class="img-zoom-result"></div>
+                    </div>
+                </div>
+                <script>
+                    imageZoom("myimage11", "myresult11");
+                    imageZoom("myimage12", "myresult12");
+                </script>
+            </div>
+            <h2 class="subtitle has-text-centered">
+                Visualisation result of PolyU dataset
+            </h2>
+        </div>
+
+    </div>
+
+    </div>
+</section>
 <!-- Image carousel -->
 <section class="hero is-small is-light">
     <div class="hero-body">
         <div class="container">
-            <h2 class="title is-3">Result visualisation</h2>
+            <h2 class="title is-3">More Result Visualisation</h2>
             <div id="results-carousel" class="carousel results-carousel">
-                <div class="item">
+                <div class="item" style="width: 960px;">
                     <!-- Your image here -->
                     <img src="static/images/noiselocal_val_gaussian@25_15.jpg"
                          alt="Kodak"/>
@@ -189,7 +404,7 @@
                         variance Gaussian noise
                     </h2>
                 </div>
-                <div class="item">
+                <div class="item" style="width: 960px;">
                     <!-- Your image here -->
                     <img src="static/images/real_50.jpg"
                          alt="real_50"
@@ -200,7 +415,7 @@
                         with real noise.
                     </h2>
                 </div>
-                <div class="item">
+                <div class="item" style="width: 960px;">
                     <!-- Your image here -->
                     <img src="static/images/real_78.jpg"
                          alt="real_78"/>
@@ -209,7 +424,7 @@
                         with real noise.
                     </h2>
                 </div>
-                <div class="item">
+                <div class="item" style="width: 960px;">
                     <!-- Your image here -->
                     <img src="static/images/real_97.jpg"
                          alt="real_97"/>
@@ -218,30 +433,32 @@
                         with real noise.
                     </h2>
                 </div>
-                <div class="item">
-                    <!-- Your image here -->
-                    <img src="static/images/Denoising%20Results%20on%20unseen%20noise%20types.jpg"
-                         alt="Unseen visualisation" class="center-image blend-img-background"/>
-                    <h2 class="subtitle has-text-centered">
-                        Qualitative denoising results on unseen noise types. All the methods are trained with Gaussian σ
-                        = 25. The quantitative PSNR/SSIM results are provided underneath the respective images. Best
-                        viewed in colour (zoom-in for a better comparison).
-                    </h2>
-                </div>
+                <!--                <div class="item" style="width: 960px;">-->
+                <!--                    &lt;!&ndash; Your image here &ndash;&gt;-->
+                <!--                    <img src="static/images/Denoising%20Results%20on%20unseen%20noise%20types.jpg"-->
+                <!--                         alt="Unseen visualisation" class="center-image blend-img-background"/>-->
+                <!--                    <h2 class="subtitle has-text-centered">-->
+                <!--                        Qualitative denoising results on unseen noise types. All the methods are trained with Gaussian σ-->
+                <!--                        = 25. The quantitative PSNR/SSIM results are provided underneath the respective images. Best-->
+                <!--                        viewed in colour (zoom-in for a better comparison).-->
+                <!--                    </h2>-->
+                <!--                </div>-->
 
-                <div class="item">
-                    <!-- Your image here -->
-                    <img src="static/images/Denoising%20Results%20on%20SIDD.jpg" alt="SIDD visualisation"/>
-                    <h2 class="subtitle has-text-centered">
-                        Qualitative denoising results on unseen noise types. All the methods are trained with Gaussian σ
-                        = 25. The quantitative PSNR/SSIM results are provided underneath the respective images. Best
-                        viewed in colour (zoom-in for a better comparison).
-                    </h2>
-                </div>
+                <!--                <div class="item" style="width: 460px;">-->
+                <!--                    &lt;!&ndash; Your image here &ndash;&gt;-->
+                <!--                    <img src="static/images/Denoising%20Results%20on%20SIDD.jpg" alt="SIDD visualisation"/>-->
+                <!--                    <h2 class="subtitle has-text-centered">-->
+                <!--                        Qualitative denoising results on unseen noise types. All the methods are trained with Gaussian σ-->
+                <!--                        = 25. The quantitative PSNR/SSIM results are provided underneath the respective images. Best-->
+                <!--                        viewed in colour (zoom-in for a better comparison).-->
+                <!--                    </h2>-->
+                <!--                </div>-->
             </div>
         </div>
     </div>
 </section>
+
+
 <!-- End image carousel -->
 
 <!--&lt;!&ndash; Paper poster &ndash;&gt;-->
@@ -274,13 +491,6 @@
         <div class="columns is-centered">
             <div class="column is-8">
                 <div class="content">
-                    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img
-                            alt="Creative Commons License" style="border-width:0"
-                            src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a><br/>This work is licensed
-                    under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons
-                    Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-                    <br>
-                    <br>
 
                     <p>
                         This page was built using the <a
